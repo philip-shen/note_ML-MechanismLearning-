@@ -1,6 +1,7 @@
 Table of Contents
 =================
 
+   * [Table of Contents](#table-of-contents)
    * [JDLA G検定直前_主要単語](#jdla-g検定直前_主要単語)
       * [人工知能の歴史](#人工知能の歴史)
          * [第一次ブーム(Boom)：探索、推論 (1956～1960年代)](#第一次ブームboom探索推論-19561960年代)
@@ -9,6 +10,7 @@ Table of Contents
          * [ILSVRC（ImageNet large scale visual recognition challenge）](#ilsvrcimagenet-large-scale-visual-recognition-challenge)
       * [格言系](#格言系)
       * [思考実験、経験則、課題／問題](#思考実験経験則課題問題)
+      * [Uncle Bernie's rule (バーニーおじさんのルール)](#uncle-bernies-rule-バーニーおじさんのルール)
       * [日本語の記事を探してみた](#日本語の記事を探してみた)
       * [英語の記事を調べてみた](#英語の記事を調べてみた)
       * [まとめ](#まとめ)
@@ -33,6 +35,24 @@ Table of Contents
             * [定義と数式](#定義と数式)
             * [Pythonコード](#pythonコード)
          * [ディープラーニング(Neural Network) アルゴリズム(Algorithms)](#ディープラーニングneural-network-アルゴリズムalgorithms)
+   * [【Python】専門書や論文を読みたいけど数学が苦手・わからない人向けのコードを読んで学ぶ数学教本](#python専門書や論文を読みたいけど数学が苦手わからない人向けのコードを読んで学ぶ数学教本)
+      * [1. 数学記号](#1-数学記号)
+         * [1.1 総和](#11-総和)
+         * [1.2 総乗](#12-総乗)
+         * [1.3 Let's try!](#13-lets-try)
+      * [2. Vector(ベクトル)](#2-vectorベクトル)
+         * [2.1 ベクトルとは](#21-ベクトルとは)
+         * [2.2 ベクトルの加法・減法](#22-ベクトルの加法減法)
+         * [2.3 ベクトルとスカラーの積](#23-ベクトルとスカラーの積)
+         * [2.4. ベクトルとベクトルの積](#24-ベクトルとベクトルの積)
+            * [2.4.1 Hadamard product(アダマール積)](#241-hadamard-productアダマール積)
+         * [2.4.2. 内積](#242-内積)
+         * [2.4.3. 外積](#243-外積)
+      * [2.5. L1norm(ノルム)、L2norm(ノルム)](#25-l1normノルムl2normノルム)
+      * [2.6. Let's try!](#26-lets-try)
+      * [3. 行列](#3-行列)
+         * [3.1. 行列とは](#31-行列とは)
+   * [Neural_Network](#neural_network)
    * [h1 size](#h1-size)
       * [h2 size](#h2-size)
          * [h3 size](#h3-size)
@@ -132,7 +152,7 @@ IBM　Watoson　クイズ王
 バーニーおじさんのルール(Uncle Bernie's rule) | ニューラルネットワークの重みパラメーターの数に対して、最低限その10倍以上の訓練データ量が必要とした経験則。古典的な位置づけでディープラーニングが登場以前からあるため、ディープラーニングにも応用できるのかは不明とされている。
 Garbage In, Garbage Out | 不良データを入力すると、出来上がる機械学習モデルもゴミ
 
-**Uncle Bernie's rule (バーニーおじさんのルール)**
+## Uncle Bernie's rule (バーニーおじさんのルール)
 [バーニーおじさんのルール（Uncle Bernie's rule）とは？](https://atmarkit.itmedia.co.jp/ait/articles/2008/12/news015.html)
 ```
 　機械学習におけるバーニーおじさんのルール（Uncle Bernie's rule）とは、
@@ -493,10 +513,247 @@ GNN | グラフ構造を入力とするニュ=ラルネットワーク。グラ�
 ------------------------------------ | ---------------------------------------------
 
 
+# 【Python】専門書や論文を読みたいけど数学が苦手・わからない人向けのコードを読んで学ぶ数学教本
+[【Python】専門書や論文を読みたいけど数学が苦手・わからない人向けのコードを読んで学ぶ数学教本 2021-11-10](https://qiita.com/PHVTuber/items/94577f506e78852180ca)  
+
+## 1. 数学記号  
+### 1.1 総和  
+<img src="images/sigma_01.jpg" width="5200" height="100">  
+```
+ans = 0
+for i in range(1,11):
+     ans += 1
+```
+
+<img src="images/sigma_02.jpg" width="5200" height="100">  
+
+```
+N = 10
+a = [i for i in range(1,N+1)] # a[0]=a_1, a[1]=a_2, .., a[N-1]=a_N
+
+#総和
+#sum(a)と等価な処理ですがfor文で書きます
+ans = 0
+for i in a:
+    ans += i
+```
+
+<img src="images/sigma_03.jpg" width="5200" height="100">  
+
+```
+a = [[1,2],[3,4]] # a_{11}=a[0][0],a_{12}=a[0][1],a_{21}=a[1][0],a_{22}=a[1][1]
+ans = 0
+for i in range(2):
+    for j in range(2):
+        ans += a[i][j]
+```
+
+### 1.2 総乗  
+<img src="images/pi_01.jpg" width="500" height="100">  
+
+```
+a = [1,2,3] # a[0]=a_1,a[1]=a_2,a[2]=a_3
+ans = 1 # ここを0にしたらどんな配列をもってきても0になってしまうので初期値は1
+for i in a:
+    ans *= i
+```
+
+<img src="images/pi_02.jpg" width="500" height="100">  
+
+```
+a = [[1,2],[3,4]]
+ans = 1
+for i in range(2):
+    for j in range(2):
+        ans *= a[i][j]
+```
+
+### 1.3 Let's try!  
+<img src="images/1_3_1.jpg" width="520" height="300">  
+
+```
+x = [[0,0,1],[1,0,0],[0,1,0]]
+a = [[0,20,30],[20,0,10],[30,10,0]]
+ans = 0
+for i in range(3):
+    for j in range(3):
+        ans += x[i][j]*a[i][j]
+```
+
+<img src="images/1_3_2_1.jpg" width="520" height="300">  
+
+<img src="images/1_3_2_2.jpg" width="520" height="300">  
+
+```
+a = [[1,2,3],[4,5,6],[7,8,9]]
+ans = 0
+for i in range(2):
+    b = 1 # 初期値
+    for j in range(3):
+        b *= a[i][j]
+    ans += b
+```
+
+
+## 2. Vector(ベクトル)
+### 2.1 ベクトルとは  
+
+### 2.2 ベクトルの加法・減法  
+<img src="images/vector_01.jpg" width="600" height="200">  
+
+```
+a = [25,30,10000] # Aさん
+b = [40,90,500] # Bさん
+ans1 = [] # 加算
+ans2 = [] # 減法
+for i in range(3):
+    ans1.append(a[i] + b[i])
+    ans2.append(a[i] - b[i])
+```
+
+```
+import numpy as np
+a = np.array([25,30,10000]) # Aさん
+b = np.array([40,90,500]) # Bさん
+ans1 = a+b # 加算
+ans2 = a-b # 減法
+```
+
+### 2.3 ベクトルとスカラーの積  
+<img src="images/vector_02.jpg" width="600" height="200">  
+
+```
+c = 10 # スカラー
+a = [25,30,10000] # Aさん
+ans = []
+for i in range(3):
+    ans.append(c*a[i])
+```
+
+```
+c = 2 # 人数
+a = [25,30,10000] # Aさん
+b = [40,90,500] # Bさん
+ans = [] # 加算
+for i,j in zip(a,b):
+    ans.append(1/c*(i+j))
+```
+
+```
+c = 2 # 人数
+a = np.array([25,30,10000]) # Aさん
+b = np.array([40,90,500]) # Bさん
+ans = (1/c)*(a+b)
+```
+
+### 2.4. ベクトルとベクトルの積  
+
+#### 2.4.1 Hadamard product(アダマール積)
+<img src="images/vector_03.jpg" width="600" height="200">  
+
+```
+a = [25,30,10000]
+b = [40,90,500]
+ans = []
+for i,j in zip(a,b):
+    ans.append(i*j)
+```
+
+### 2.4.2. 内積  
+<img src="images/vector_04.jpg" width="600" height="200">  
+
+```
+a = [25,30,10000]
+b = [40,90,500]
+ans = 0
+for i,j in zip(a,b):
+    ans += i*j
+```
+
+### 2.4.3. 外積
+```
+これは厄介で物理では頻出なのですが、外積(クロス積)を定義できない次元というのがあるため私が知る限りでは機械学習等で扱われません。今は知識だけに留めておくと良いでしょう。ここでは33次元ベクトル同士の外積を取り扱います。
+```
+
+<img src="images/vector_05.jpg" width="600" height="200">  
+
+```
+a = [25,30,10000]
+b = [40,90,500]
+ans = [a[2]*b[3]-a[3]*b[2],a[3]*b[1]-a[1]*b[3],a[1]*b[2]-a[2]*b[1]]
+```
+
+## 2.5. L1norm(ノルム)、L2norm(ノルム)
+<img src="images/norm_01.jpg" width="500" height="200">  
+
+```
+a = [25,-30,100]
+ans = 0
+for i in a:
+    ans += abs(i)
+```
+
+<img src="images/norm_02.jpg" width="500" height="200">  
+
+```
+a = [25,-30,100]
+ans = 0
+for i in a:
+    ans += i**2
+ans = (ans)**(0.5)
+```
+
+## 2.6. Let's try!  
+<img src="images/vector_06.jpg" width="600" height="200">  
+
+<img src="images/vector_07.jpg" width="600" height="200">  
+
+```
+a = [2,0,0]
+b = [0,1,0]
+c = [0,0,1]
+d = [a[2]*b[3]-a[3]*b[2],a[3]*b[1]-a[1]*b[3],a[1]*b[2]-a[2]*b[1]]
+ans = 0
+for i,j in zip(c,d):
+    ans += i*j
+```
+
+## 3. 行列  
+
+### 3.1. 行列とは  
+"" | Aさん | Bさん
+----- | ------ | ------  
+年齢 | 25 | 35
+通勤時間(分) | 30 | 90
+
+<img src="images/matrix_01.jpg" width="600" height="200">  
+
+<img src="images/matrix_02.jpg" width="600" height="200">  
+
+```
+T = [[25,35],
+     [30,90]]
+```
+
+```
+c = [25,35] # 年齢
+d = [30,90] # 通勤時間
+T = [c,d]
+```
+
 * []()  
 
 ![alt tag]()
 <img src="" width="" height="">  
+
+```
+
+```
+
+
+# Neural_Network
+[[筆記] 從無到有建立神經網路(neural network)](https://softnshare.com/neural-network-from-scratch/)
+[Neural_Network_from_Scratch](https://aegeorge42.github.io/)
 
 # h1 size
 
@@ -524,4 +781,8 @@ GNN | グラフ構造を入力とするニュ=ラルネットワーク。グラ�
 - 1
 - 2
 - 3
+
+
+
+
 
